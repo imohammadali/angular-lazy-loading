@@ -1,27 +1,30 @@
-import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {PagesComponent} from "./pages/pages.component";
 import {NgModule} from "@angular/core";
 import {MetaResolverService} from "./resolvers/meta-resolver.service";
-import {ContactComponent} from "./pages/contact/contact-component";
-import {FaqComponent} from "./pages/faq/faq-component";
+import {CustomPreloadStrategy} from "./services/custom-preload-strategy";
 
 export const routes: Routes = [
   // After login : this resolve guaranty that this routes load after loading meta service load
   {
     path: '',
     component: PagesComponent,
-    resolve:{
+    resolve: {
       meta: MetaResolverService
     },
-    children:[
+    children: [
       {
-        path: 'about',loadChildren: ()=>import('./pages/about/about.module').then(m=>m.AboutModule),
+        path: 'about',
+        loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule),
       },
       {
-        path: 'contact',loadChildren: ()=>import('./pages/contact/contact.module').then(m=>m.ContactModule)
+        path: 'contact',
+        loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule)
       },
       {
-        path: 'faq',loadChildren: ()=>import('./pages/faq/faq.module').then(m=>m.FaqModule)
+        path: 'faq',
+        loadChildren: () => import('./pages/faq/faq.module').then(m => m.FaqModule),
+        data: {preload: true}
       }
     ]
   }
@@ -29,8 +32,8 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{
-    preloadingStrategy: PreloadAllModules
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: CustomPreloadStrategy
   })],
   exports: [RouterModule]
 })

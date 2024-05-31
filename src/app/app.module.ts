@@ -6,6 +6,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {CommonModule} from "@angular/common";
 import {PagesComponent} from "./pages/pages.component";
 import {HttpClientModule} from "@angular/common/http";
+import {CustomPreloadStrategy} from "./services/custom-preload-strategy";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import {HttpClientModule} from "@angular/common/http";
     CommonModule,
     HttpClientModule,
   ],
-  providers:[],
+  providers:[
+    CustomPreloadStrategy
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
