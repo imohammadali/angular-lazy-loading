@@ -1,4 +1,4 @@
-import {RouterModule, Routes} from '@angular/router';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {PagesComponent} from "./pages/pages.component";
 import {NgModule} from "@angular/core";
 import {MetaResolverService} from "./resolvers/meta-resolver.service";
